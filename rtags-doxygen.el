@@ -240,7 +240,7 @@ yasnippet to let the user enter missing field manually."
 	  ((arguments (alist-get 'arguments symbol)))
 	(when arguments
 	  (push (cons 'params (rtags-get-parameter-list arguments)) info)))
-      (push (cons 'ret-type (replace-regexp-in-string " $" "" (alist-get 'type symbol ""))) info)
+      (push (cons 'ret-type (replace-regexp-in-string " \(.*$" "" (alist-get 'type symbol ""))) info)
       (let*
 	  ((func (cdr templ))
 	   (snippet
