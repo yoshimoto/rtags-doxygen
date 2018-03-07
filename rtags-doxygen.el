@@ -199,7 +199,7 @@ Keymap: \\{rtags-doxygen-mode-map}"
 				(> (decf len) 1))
 		      (let*
 			  ((pos (format "%s:%d:%d" loc-start linenum (+ loc-end len)))
-			   (param (rtags-symbol-info-internal :location pos)))
+			   (param (rtags-symbol-info-internal :location pos :silent t)))
 			(when param
 			  (let*
 			      ((name (alist-get 'symbolName param))
@@ -221,14 +221,16 @@ Comment will be inserted before LOCATION (default current line). It uses
 yasnippet to let the user enter missing field manually."
   (interactive)
   (when (or (not (rtags-called-interactively-p)) (rtags-sandbox-id-matches))
-    (save-some-buffers t) ;; it all kinda falls apart when buffers are unsaved
-    (rtags-reparse-file-if-needed)
+    ;; !!FIXME!! (rtags-sandbox-file-if-needed) seems not to work as expected.
+    ;;(rtags-reparse-file-if-needed)
+    (rtags-reparse-file nil t)
+    (sleep-for .5) ;; !!FIXME!! 
     (unless location
       (setq location (rtags-find-doxyen-comment-target)))
     (unless location
       (error "Can't find target here"))
     (let*
-	((symbol (rtags-symbol-info-internal :location location))
+	((symbol (rtags-symbol-info-internal :location location :silent t))
 	 (kind (and symbol (alist-get 'kind symbol)))
 	 (templ (and kind (assoc kind rtags-doxygen-template)))
 	 info)
