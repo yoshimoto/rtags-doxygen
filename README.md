@@ -2,7 +2,7 @@
 
 ## Introduction
 
-rtags-doxygen.el creates doxygen comment at point. It uses RTags to parse the c/c++ source codes, and yasnippet to let the user enter missing field manually.
+rtags-doxygen.el is an Emacs package for writing [doxygen](http://www.doxygen.org/) comment. It uses [RTags](https://github.com/Andersbakken/rtags) to parse the c/c++ source codes, and [yasnippet](https://github.com/joaotavora/yasnippet) to let the user enter missing field manually.
 
 ## Usage
 
